@@ -44,6 +44,12 @@ class ChangePasswordForm(Form):
     password2 = PasswordField('Confirm new password', validators=[Required()])
     submit = SubmitField('Update Password')
 
+class ChangeDfBTokenForm(Form):
+    dfbtoken = StringField('New Authorisation Token', validators=[
+                                                Required()])
+    submit = SubmitField('Update Token')
+
+
 class PasswordResetRequestForm(Form):
     email = StringField('Email', validators=[Required(), Length(1, 64),
                                              Email()])

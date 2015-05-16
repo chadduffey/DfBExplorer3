@@ -4,7 +4,8 @@ from . import auth
 from .. import db
 from ..models import User
 from ..email import send_email
-from .forms import LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+from .forms import (LoginForm, RegistrationForm, ChangePasswordForm, PasswordResetRequestForm, 
+                    PasswordResetForm, ChangeEmailForm, ChangeDfBTokenForm)
 
 @auth.before_app_request
 def before_request():
@@ -97,6 +98,16 @@ def change_password():
             flash('Invalid password.')
     return render_template("auth/change_password.html", form=form)
 
+@auth.route('/change-dfbtoken', methods=['GET', 'POST'])
+@login_required
+def change_token():
+    form = ChangeDfBTokenForm()
+    if form.validate_on_submit():
+        current_user.dfbpassword = form.dfbtoken.data
+        db.session.add(current_user)
+        flash('Your token has been updated.')
+        return redirect(url_for('main.index'))
+    return render_template("auth/change_token.html", form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
