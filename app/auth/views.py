@@ -92,6 +92,7 @@ def change_password():
         if current_user.verify_password(form.old_password.data):
             current_user.password = form.password.data
             db.session.add(current_user)
+            db.session.commit()
             flash('Your password has been updated.')
             return redirect(url_for('main.index'))
         else:
@@ -105,6 +106,7 @@ def change_token():
     if form.validate_on_submit():
         current_user.dfbpassword = form.dfbtoken.data
         db.session.add(current_user)
+        db.session.commit()
         flash('Your token has been updated.')
         return redirect(url_for('main.index'))
     return render_template("auth/change_token.html", form=form)
