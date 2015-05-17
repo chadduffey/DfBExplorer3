@@ -56,6 +56,7 @@ class User(UserMixin, db.Model):
             return False
         self.password = new_password
         db.session.add(self)
+        db.session.commit()
         return True
 
     def generate_email_change_token(self, new_email, expiration=3600):
@@ -77,6 +78,7 @@ class User(UserMixin, db.Model):
             return False
         self.email = new_email
         db.session.add(self)
+        db.session.commit()
         return True
 
     def __repr__(self):
