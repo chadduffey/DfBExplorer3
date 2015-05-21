@@ -12,9 +12,10 @@ import json
 def index():
     if current_user.is_authenticated():
 		#Dropbox Basics
+		dfbpwd = current_user.dfbpassword
 		request = urllib2.Request('https://api.dropbox.com/1/team/get_info')
 		request.add_header('Content-type', 'application/json')
-		request.add_header('Authorization','Bearer Roti84bECDUAAAAAAAACOhZz6DJtV9g4kWxk2_6gc7GOObK7nrmz1c4ITHm1wlOE')
+		request.add_header('Authorization', dfbpwd)
 		body = str('{}')
 		request.add_data(body)
 		response = urllib2.urlopen(request)
