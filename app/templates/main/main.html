@@ -1,11 +1,221 @@
 {% extends "base.html" %}
 
-{% block title %}DfB Explorer{% endblock %}
+{% block title %}DfB Explorer - Overview{% endblock %}
 
 {% block content %}
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1.0', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawChart);
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Licences in use', {{ licencesInUse }} ],
+      ['Licences Available', {{ remainingLicences }} ]
+    ]);
+
+    // Set chart options
+    var options = {'title':'Dropbox for Business Licences',
+                   'width':400,
+                   'height':300};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
+</script>
+
+<div class="container-fluid">	
+  		<div class="row">
+    		<div class="col-sm-2 sidebar">
+      			<ul class="nav nav-sidebar">
+		            <li class="active"><a href="{{ url_for('main.index') }}">Team Overview <span class="sr-only">(current)</span></a></li>
+		            <li><a href="{{ url_for('main.sharing_activity') }}">Sharing Activity</a></li>
+		            <li><a href="{{ url_for('main.team_storage') }}">Team Storage</a></li>
+		            <li><a href="{{ url_for('main.group_membership') }}">Group Membership</a></li>
+		            <li><a href="{{ url_for('main.team_management') }}">Team Management</a></li>
+		            <li><a href="{{ url_for('main.devices') }}">Devices</a></li>
+		            <li><a href="{{ url_for('main.team_audit') }}">Team Audit</a></li>
+	         	</ul>
+	     	</div>
+	     	<div class="col-md-8">
+	     		<h1 class="page-header">Team Overview</h1>
+	     		<div class="row placeholders">
+
+            		<div class="col-xs-6 col-sm-3 placeholder">
+              			<img src="./static/img/graph1.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              			<h4>Total Dropbox Users</h4>
+              			<span class="text-muted">Full count of Dropbox Users</span>
+            		</div>
+
+            		<div class="col-xs-6 col-sm-3 placeholder">
+		              	<img src="./static/img/graph1.png" class="img-responsive" alt="Generic placeholder thumbnail">
+		              	<h4>New Dropbox Users</h4>
+		              	<span class="text-muted">How many new people signed up each day</span>
+            		</div>
+		            <div class="col-xs-6 col-sm-3 placeholder">
+		              	<img src="./static/img/graph1.png" class="img-responsive" alt="Generic placeholder thumbnail">
+		              	<h4>Folders Shared</h4>
+		              	<span class="text-muted">Sharing Activity for the team</span>
+		            </div>
+            		<div class="col-xs-6 col-sm-3 placeholder" style="margin-bottom: 60px;">
+              			<img src="./static/img/graph1.png" class="img-responsive" alt="Generic placeholder thumbnail">
+              			<h4>Links Created</h4>
+              			<span class="text-muted">Linking Activity for the team</span>
+            		</div>
+
+					<h2 class="sub-header" style="margin-top: 40px;">Team Members</h2>
+					          <div class="table-responsive">
+					            <table class="table table-striped">
+					              <thead>
+					                <tr>
+					                  <th>#</th>
+					                  <th>User Name</th>
+					                  <th>User Email</th>
+					                  <th>Links created</th>
+					                  <th>Total Storage</th>
+					                </tr>
+					              </thead>
+					              <tbody>
+					                <tr>
+					                  <td>1,001</td>
+					                  <td>Lorem</td>
+					                  <td>ipsum</td>
+					                  <td>dolor</td>
+					                  <td>sit</td>
+					                </tr>
+					                <tr>
+					                  <td>1,002</td>
+					                  <td>amet</td>
+					                  <td>consectetur</td>
+					                  <td>adipiscing</td>
+					                  <td>elit</td>
+					                </tr>
+					                <tr>
+					                  <td>1,003</td>
+					                  <td>Integer</td>
+					                  <td>nec</td>
+					                  <td>odio</td>
+					                  <td>Praesent</td>
+					                </tr>
+					                <tr>
+					                  <td>1,003</td>
+					                  <td>libero</td>
+					                  <td>Sed</td>
+					                  <td>cursus</td>
+					                  <td>ante</td>
+					                </tr>
+					                <tr>
+					                  <td>1,004</td>
+					                  <td>dapibus</td>
+					                  <td>diam</td>
+					                  <td>Sed</td>
+					                  <td>nisi</td>
+					                </tr>
+					                <tr>
+					                  <td>1,005</td>
+					                  <td>Nulla</td>
+					                  <td>quis</td>
+					                  <td>sem</td>
+					                  <td>at</td>
+					                </tr>
+					                <tr>
+					                  <td>1,006</td>
+					                  <td>nibh</td>
+					                  <td>elementum</td>
+					                  <td>imperdiet</td>
+					                  <td>Duis</td>
+					                </tr>
+					                <tr>
+					                  <td>1,007</td>
+					                  <td>sagittis</td>
+					                  <td>ipsum</td>
+					                  <td>Praesent</td>
+					                  <td>mauris</td>
+					                </tr>
+					                <tr>
+					                  <td>1,008</td>
+					                  <td>Fusce</td>
+					                  <td>nec</td>
+					                  <td>tellus</td>
+					                  <td>sed</td>
+					                </tr>
+					                <tr>
+					                  <td>1,009</td>
+					                  <td>augue</td>
+					                  <td>semper</td>
+					                  <td>porta</td>
+					                  <td>Mauris</td>
+					                </tr>
+					                <tr>
+					                  <td>1,010</td>
+					                  <td>massa</td>
+					                  <td>Vestibulum</td>
+					                  <td>lacinia</td>
+					                  <td>arcu</td>
+					                </tr>
+					                <tr>
+					                  <td>1,011</td>
+					                  <td>eget</td>
+					                  <td>nulla</td>
+					                  <td>Class</td>
+					                  <td>aptent</td>
+					                </tr>
+					                <tr>
+					                  <td>1,012</td>
+					                  <td>taciti</td>
+					                  <td>sociosqu</td>
+					                  <td>ad</td>
+					                  <td>litora</td>
+					                </tr>
+					                <tr>
+					                  <td>1,013</td>
+					                  <td>torquent</td>
+					                  <td>per</td>
+					                  <td>conubia</td>
+					                  <td>nostra</td>
+					                </tr>
+					                <tr>
+					                  <td>1,014</td>
+					                  <td>per</td>
+					                  <td>inceptos</td>
+					                  <td>himenaeos</td>
+					                  <td>Curabitur</td>
+					                </tr>
+					                <tr>
+					                  <td>1,015</td>
+					                  <td>sodales</td>
+					                  <td>ligula</td>
+					                  <td>in</td>
+					                  <td>libero</td>
+					                </tr>
+					              </tbody>
+					            </table>
+
+
+	     		</div>
+	     	</div>
+	    </div>	
+	</div>
+
+
 <div class="container">
 	<div class="page-header">
-		<h1>Hello, {{ user.username }}</h1>
+		
 		<p>Email: {{ user.email }}</p>
 		<p>DfB Token: {{ user.dfbpassword }}</p>
 		<br>
@@ -20,40 +230,7 @@
 		<p><h4>Test using the Google Chart Library</h4></p>
 		<p>Using Dropbox API data</p>
 
-	    <!--Load the AJAX API-->
-	    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	    <script type="text/javascript">
-
-	    // Load the Visualization API and the piechart package.
-	    google.load('visualization', '1.0', {'packages':['corechart']});
-
-	    // Set a callback to run when the Google Visualization API is loaded.
-	    google.setOnLoadCallback(drawChart);
-
-	    // Callback that creates and populates a data table,
-	    // instantiates the pie chart, passes in the data and
-	    // draws it.
-	    function drawChart() {
-
-	        // Create the data table.
-	        var data = new google.visualization.DataTable();
-	        data.addColumn('string', 'Topping');
-	        data.addColumn('number', 'Slices');
-	        data.addRows([
-	          ['Licences in use', {{ licencesInUse }} ],
-	          ['Licences Available', {{ remainingLicences }} ]
-	        ]);
-
-	        // Set chart options
-	        var options = {'title':'Dropbox for Business Licences',
-	                       'width':400,
-	                       'height':300};
-
-	        // Instantiate and draw our chart, passing in some options.
-	        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-	        chart.draw(data, options);
-	    }
-	    </script>
+	    
 
 	    <!--Div that will hold the pie chart-->
     	<div id="chart_div"></div>

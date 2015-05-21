@@ -28,3 +28,32 @@ def index():
 		return render_template('main/main.html', user=current_user, dbTeamName=dbTeamName, remainingLicences=remainingLicences,
     							totalLicences=totalLicences, licencesInUse=licencesInUse, teamId=teamId)
     return render_template('index.html')
+
+@main.route('/sharing_activity', methods=['GET', 'POST'])
+def sharing_activity():
+	return render_template('main/sharing_activity.html')
+
+
+@main.route('/team_storage', methods=['GET', 'POST'])
+def team_storage():
+	return render_template('main/team_storage.html')
+
+
+@main.route('/group_membership', methods=['GET', 'POST'])
+def group_membership():
+	return render_template('main/group_membership.html')
+
+
+@main.route('/team_management', methods=['GET', 'POST'])
+def team_management():
+	return render_template('main/team_management.html')
+
+
+@main.route('/devices', methods=['GET', 'POST'])
+def devices():
+	return render_template('main/devices.html')
+
+
+@main.route('/team_audit', methods=['GET', 'POST'])
+def team_audit():
+	return render_template('main/team_audit.html')
