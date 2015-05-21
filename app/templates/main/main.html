@@ -86,7 +86,7 @@ function drawChart1() {
             		</div>
 
             		<div class="col-xs-6 col-sm-6 placeholder" style="margin-bottom: 40px;">
-		              	<h4>Devices</h4>
+		              	<h4>Team Devices</h4>
 		              	<span class="text-muted">Placeholder Graph</span>
 		              	<div id="chart_div1"></div>
             		</div>
@@ -149,23 +149,11 @@ function drawChart1() {
 		<p>Email: {{ user.email }}</p>
 		<p>DfB Token: {{ user.dfbpassword }}</p>
 		<br>
-		<p><h4>Dropbox API data</h4></p>
 		<p>Dropbox Team Name: {{ dbTeamName }}</p>
 		<p>Dropbox Team Id: {{ teamId }}</p>
 		<p>Total Business Licences: {{ totalLicences }}</p>
 		<p>Licences in Use: {{ licencesInUse }}</p>
 		<p>Remaining Licences: {{ remainingLicences }}</p>
-		<p>We are in the main section of the app.</p>
-		<br>
-		<p><h4>Test using the Google Chart Library</h4></p>
-		<p>Using Dropbox API data</p>
-
-	    
-
-	    <!--Div that will hold the pie chart-->
-    	<div id="chart_div"></div>
-
-
 	</div>
 </div>
 {% endblock %}
