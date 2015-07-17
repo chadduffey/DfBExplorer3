@@ -104,7 +104,7 @@ def change_password():
 def change_token():
     form = ChangeDfBTokenForm()
     if form.validate_on_submit():
-        current_user.dfbpassword = form.dfbtoken.data
+        current_user.dfbpassword = "Bearer " + form.dfbtoken.data
         db.session.add(current_user)
         db.session.commit()
         flash('Your token has been updated.')

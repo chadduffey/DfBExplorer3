@@ -1,5 +1,5 @@
 #this is a scratchpad to be launched independently of the app itself to test app calls and string work
-
+'''
 import urllib2
 import json
 
@@ -25,3 +25,24 @@ print "Team name is: " + converted_data["name"]
 print "The total number of licences is: " + str(converted_data["num_licensed_users"])
 print "The total number of licences in use: " + str(converted_data["num_provisioned_users"])
 print "The Dropbox team ID is: " + converted_data["team_id"]
+'''
+import urllib2
+import json
+
+def teamMembers():
+	dfbpwd = "Bearer 5POVRTzm3ZAAAAAAAAABTtqrqiasvx-jR2W5LyEFfKRBmi41ORoyT_rxgq5-761M"
+	request = urllib2.Request('https://api.dropbox.com/1/team/members/list')
+	request.add_header('Content-type', 'application/json')
+	request.add_header('Authorization', dfbpwd)
+	body = str('{}')
+	request.add_data(body)
+	response = urllib2.urlopen(request)
+	data = response.read()
+	converted_data = json.loads(data)
+	return converted_data
+
+data = teamMembers()
+allTeamMembers = data.get("members")
+for member in allTeamMembers:
+	print member["profile"]["email"]
+

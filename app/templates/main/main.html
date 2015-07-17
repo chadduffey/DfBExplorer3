@@ -97,41 +97,21 @@ function drawChart1() {
 					            <table class="table table-striped">
 					              <thead>
 					                <tr>
-					                  <th>#</th>
-					                  <th>User Name</th>
+					                  <th>Member Id</th>
+					                  <th>Name</th>
 					                  <th>User Email</th>
-					                  <th>Links created</th>
-					                  <th>Total Storage</th>
+					                  <th>Status</th>
 					                </tr>
 					              </thead>
-					              <tbody>
-					                <tr>
-					                  <td>1,001</td>
-					                  <td>Lorem</td>
-					                  <td>ipsum</td>
-					                  <td>dolor</td>
-					                  <td>sit</td>
-					                </tr>
-					                <tr>
-					                  <td>1,008</td>
-					                  <td>Fusce</td>
-					                  <td>nec</td>
-					                  <td>tellus</td>
-					                  <td>sed</td>
-					                </tr>
-					                <tr>
-					                  <td>1,009</td>
-					                  <td>augue</td>
-					                  <td>semper</td>
-					                  <td>porta</td>
-					                  <td>Mauris</td>
-					                </tr>
-					                  <td>1,015</td>
-					                  <td>sodales</td>
-					                  <td>ligula</td>
-					                  <td>in</td>
-					                  <td>libero</td>
-					                </tr>
+					              <tbody>					                
+					                	{% for member in teamMembers %}
+					                	<tr>
+					                		<td>{{ member["profile"]["member_id"] }}</td>
+					                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+											<td>{{ member["profile"]["email"] }}</td>
+											<td>{{ member["profile"]["status"] }}</td>
+										</tr>
+										{% endfor %}
 					              </tbody>
 					            </table>
 
@@ -140,20 +120,4 @@ function drawChart1() {
 	     	</div>
 	    </div>	
 	</div>
-
-
-<div class="container">
-	<div class="page-header">
-		<h5>---Tempory Content Only---</h5>
-		<h5>---API Experiments---</h5>
-		<p>Email: {{ user.email }}</p>
-		<p>DfB Token: {{ user.dfbpassword }}</p>
-		<br>
-		<p>Dropbox Team Name: {{ dbTeamName }}</p>
-		<p>Dropbox Team Id: {{ teamId }}</p>
-		<p>Total Business Licences: {{ totalLicences }}</p>
-		<p>Licences in Use: {{ licencesInUse }}</p>
-		<p>Remaining Licences: {{ remainingLicences }}</p>
-	</div>
-</div>
 {% endblock %}
