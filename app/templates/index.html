@@ -2,96 +2,15 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}DfB Explorer{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="../static/css/frontpage.css">
+    <link href='http://fonts.googleapis.com/css?family=Economica|Source+Code+Pro' rel='stylesheet' type='text/css'>
+{% endblock %}
 
 {% block page_content %}
-
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Dropbox for Business Explorer</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1"><!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge'><![endif]-->
-    <link rel="stylesheet" type="text/css" href="../static/homepage/moonhunters.css"><link rel="stylesheet" href="../static/homepage/swiper/idangerous.swiper.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="../static/homepage/animate.css">
-    
-    <script type="text/javascript" src="../static/homepage/moonhunters/moonhunters.nocache.js"></script>
-    <script defer src="../static/homepage/swiper/idangerous.swiper.js"></script><script defer src="../static/homepage/swiper/navigation.js"></script>
-</head>
-
-<body>
-
-<div id="wrapper">
-    <!-- CONTENT BEGIN -->
-    <div id="mainContent">
-
-        <div id="header" class="headerSize">
-            <div id="logoContainer">
-                <div id="logo" data-scroll-reveal="enter top move 500px over 2s after 2s">
-                    <img src="../static/homepage/images/logo/logo.png" alt="logo" title="logo">
-                </div>
-            </div>
-        </div>
-        <div class="content-wrapper">
-            <div class="content">
-                <div class="headerSize"></div>
-                <div id="headerText">
-                    <div class="title"><p>Welcome to Dropbox for Business Explorer </p><h4> Log in to <span class="benefitTitles_Tuned" data-anijs="if: mouseover, on: window, do: zoomIn animated, after: holdAnimClass">Get Started !</span></h4></div>
-                </div>
-
-                <!-- CONTENT END -->
-                
-
-                <!-- SUBSCRIBE BEGIN -->
-
-                <div class="footerSize"></div>
-                <!-- SUBSCRIBE END -->
-            </div>
-        </div>
-
-        <!-- FOOTER BEGIN -->
-
-
-        <div id="footer" class="footerSize">
-            <div id="footerBottom">
-                <div id="iconsWrapper">
-                    <ul id="icons">
-                        <li class="icon">
-                            <a href="#" target="_blank" style="background-image: url('../static/homepage/images/star_galaxy_icons/twitter.png');"></a>
-                        </li>
-                    </ul></div>
-            </div>
-        </div>
-
-
-        <!-- FOOTER END -->
-    </div>
-
-
-
-
-</div>
-
-<div id="titles">
-
-</div>
-
-<!-- BACKGROUND -->
-<div id="backgroundImage">../static/homepage/images/background/3.jpg|1920|1080</div>
-
-<!-- SLIDE SHOW IMAGES -->
-
-
-<!-- YOUTUBE -->
-
-<script src="../static/homepage/js/anijs.js"></script>
-<script src='../static/homepage/js/scrollReveal.js'></script>
-<script>new scrollReveal</script>
-
-
-</body></html>
- 
-
+    {{ super() }}
+    <h1 class="cover-heading">DfB Explorer</h1>
+    <a href="{{ url_for('auth.login') }}"><img src="../static/img/spaceman.png" width="200px" height="auto"/></a>
+    <p class="lead">... take a peek inside your Dropbox for Business team ...</p>
 {% endblock %}
