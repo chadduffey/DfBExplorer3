@@ -42,7 +42,7 @@ def teamStorage():
 	return converted_data
 
 data = teamStorage()
-allStorage = data.get("total_usage")
-for entry in allStorage:
+sharedStorage = data.get("shared_usage")
+for entry in sharedStorage:
 	print entry #["profile"]["email"]
 
