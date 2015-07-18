@@ -29,9 +29,9 @@ print "The Dropbox team ID is: " + converted_data["team_id"]
 import urllib2
 import json
 
-def teamMembers():
+def teamStorage():
 	dfbpwd = "Bearer 5POVRTzm3ZAAAAAAAAABTtqrqiasvx-jR2W5LyEFfKRBmi41ORoyT_rxgq5-761M"
-	request = urllib2.Request('https://api.dropbox.com/1/team/members/list')
+	request = urllib2.Request('https://api.dropbox.com/1/team/reports/get_storage')
 	request.add_header('Content-type', 'application/json')
 	request.add_header('Authorization', dfbpwd)
 	body = str('{}')
@@ -41,8 +41,8 @@ def teamMembers():
 	converted_data = json.loads(data)
 	return converted_data
 
-data = teamMembers()
-allTeamMembers = data.get("members")
-for member in allTeamMembers:
-	print member["profile"]["email"]
+data = teamStorage()
+allStorage = data.get("total_usage")
+for entry in allStorage:
+	print entry #["profile"]["email"]
 

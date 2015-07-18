@@ -91,31 +91,28 @@ function drawChart1() {
 		              	<div id="chart_div1"></div>
             		</div>
 
-
 					<h2 class="sub-header" style="margin-top: 40px;">Team Members</h2>
-					          <div class="table-responsive">
-					            <table class="table table-striped">
-					              <thead>
-					                <tr>
-					                  <th>Member Id</th>
-					                  <th>Name</th>
-					                  <th>User Email</th>
-					                  <th>Status</th>
-					                </tr>
-					              </thead>
-					              <tbody>					                
-					                	{% for member in teamMembers %}
-					                	<tr>
-					                		<td>{{ member["profile"]["member_id"] }}</td>
-					                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
-											<td>{{ member["profile"]["email"] }}</td>
-											<td>{{ member["profile"]["status"] }}</td>
-										</tr>
-										{% endfor %}
-					              </tbody>
-					            </table>
-
-
+					<div class="table-responsive">
+					    <table class="table table-striped">
+			              <thead>
+			                <tr>
+			                  <th>Member Id</th>
+			                  <th>Name</th>
+			                  <th>User Email</th>
+			                  <th>Status</th>
+			                </tr>
+			              </thead>
+			              <tbody>					                
+			                	{% for member in teamMembers %}
+			                	<tr>
+			                		<td>{{ member["profile"]["member_id"] }}</td>
+			                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+									<td>{{ member["profile"]["email"] }}</td>
+									<td>{{ member["profile"]["status"] }}</td>
+								</tr>
+								{% endfor %}
+			              </tbody>
+					    </table>
 	     		</div>
 	     	</div>
 	    </div>	

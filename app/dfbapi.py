@@ -26,3 +26,15 @@ def teamMembers():
 	data = response.read()
 	converted_data = json.loads(data)
 	return converted_data
+
+def teamStorage():
+	dfbpwd = current_user.dfbpassword
+	request = urllib2.Request('https://api.dropbox.com/1/team/reports/get_storage')
+	request.add_header('Content-type', 'application/json')
+	request.add_header('Authorization', dfbpwd)
+	body = str('{}')
+	request.add_data(body)
+	response = urllib2.urlopen(request)
+	data = response.read()
+	converted_data = json.loads(data)
+	return converted_data

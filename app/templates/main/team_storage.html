@@ -1,5 +1,40 @@
 {% extends "base.html" %}
 
+{% block head %}
+{{ super() }}
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Time', 'MB'],
+          {% for entry in total_usage if entry|int != 0 %}
+	          ['',  {{ entry|int / 1024 /1024 + 50}}],
+          {% endfor %}
+        ]);
+
+        var options = {
+          title: 'Dropbox Storage (Team)',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+{% endblock %}
+
 {% block title %}DfB Explorer - Storage{% endblock %}
 
 {% block content %}
@@ -18,7 +53,7 @@
 	     	</div>
 	     	<div class="col-md-8">
 				<h1>Team Storage</h1>
-				<h3>Coming Soon</h3>
+				<div id="curve_chart" style="width: 900px; height: 500px"></div>
 			</div>
 		</div>
 	</div>

@@ -4,7 +4,7 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from . import main
-from ..dfbapi import basicInfo, teamMembers
+from ..dfbapi import basicInfo, teamMembers, teamStorage
 
 import urllib2
 import json
@@ -47,7 +47,30 @@ def sharing_activity():
 
 @main.route('/team_storage', methods=['GET', 'POST'])
 def team_storage():
-	return render_template('main/team_storage.html')
+	if current_user.is_authenticated():
+		try:
+			data = teamStorage()
+			total_usage = data.get("total_usage")
+			member_storage_map = data.get("member_storage_map")
+			shared_usage = data.get("shared_usage")
+			unshared_usage = data.get("unshared_usage")
+			shared_folders = data.get("shared_folders")
+			start_date = data.get("start_date")
+			return render_template('main/team_storage.html', 
+											total_usage=total_usage,
+											member_storage_map=member_storage_map,
+											shared_usage=shared_usage,
+											unshared_usage=unshared_usage,
+											shared_folders=shared_folders,
+											start_date=start_date)
+		except:
+			return render_template('main/team_storage.html', 
+											total_usage=[1,200,3000],
+											member_storage_map=1,
+											shared_usage=1,
+											unshared_usage=1,
+											shared_folders=1,
+											start_date=1/1/1)
 
 
 @main.route('/group_membership', methods=['GET', 'POST'])
