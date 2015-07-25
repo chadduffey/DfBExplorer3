@@ -96,21 +96,30 @@ function drawChart1() {
 					    <table class="table table-striped">
 			              <thead>
 			                <tr>
-			                  <th>Member Id</th>
 			                  <th>Name</th>
 			                  <th>User Email</th>
 			                  <th>Status</th>
+                        <th>Member Id</th>
 			                </tr>
 			              </thead>
 			              <tbody>					                
 			                	{% for member in teamMembers %}
-			                	<tr>
-			                		<td>{{ member["profile"]["member_id"] }}</td>
-			                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
-									<td>{{ member["profile"]["email"] }}</td>
-									<td>{{ member["profile"]["status"] }}</td>
-								</tr>
-								{% endfor %}
+                        {% if  member["profile"]["status"] == "invited" %}
+                            <tr>
+                              <td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+                              <td>{{ member["profile"]["email"] }}</td>
+                              <td style="color:#3366CC;">{{ member["profile"]["status"] }}</td>
+                              <td>{{ member["profile"]["member_id"] }}</td>
+                            </tr>
+                        {% else %}
+    			                	<tr>
+    			                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+            									<td>{{ member["profile"]["email"] }}</td>
+            									<td style="color:#109618;">{{ member["profile"]["status"] }}</td>
+                              <td>{{ member["profile"]["member_id"] }}</td>
+            								</tr>
+                        {% endif %}
+        								{% endfor %}
 			              </tbody>
 					    </table>
 	     		</div>
