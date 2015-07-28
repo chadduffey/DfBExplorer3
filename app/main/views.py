@@ -4,7 +4,9 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from . import main
-from ..dfbapi import basicInfo, teamMembers, teamStorage
+from ..dfbapi import basicInfo, teamMembers, teamStorage, deleteMember, addMember
+
+from forms import AddUserForm
 
 import urllib2
 import json
@@ -80,7 +82,22 @@ def group_membership():
 
 @main.route('/team_management', methods=['GET', 'POST'])
 def team_management():
-	return render_template('main/team_management.html')
+	form = AddUserForm()
+	allTeamMembers = teamMembers()
+	allTeamMembers = allTeamMembers.get("members")
+	if form.validate_on_submit():
+		member_email = form.member_email.data
+		member_given_name = form.member_given_name.data
+		member_surname = form.member_surname.data
+		member_external_id = form.member_external_id.data
+		newguy = addMember(member_email, member_given_name, member_surname, member_external_id)
+		return redirect('/')
+	return render_template('main/team_management.html', form=form, teamMembers=allTeamMembers)
+
+@main.route('/delete_user/<member_id>', methods=['GET', 'POST'])
+def delete_user(member_id):
+	ok = deleteMember(member_id)
+	return redirect('/team_management')
 
 
 @main.route('/devices', methods=['GET', 'POST'])
