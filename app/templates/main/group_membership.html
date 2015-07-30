@@ -18,8 +18,23 @@
 	     	</div>
 	     	<div class="col-md-8">
 				<h1>Group Memberships</h1>
-				<h3>Coming Soon</h3>
+				<ul class="list-group">
+				{% for group in groups %}
+            		<li class="list-group-item">
+                    <span class="badge">{{ group["num_members"] }}</span>
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                    <strong>{{ group["group_name"] }}</strong> (Group Id: {{ group["group_id"] }})
+        			</li>
+        		{% endfor %}
+        		</ul>
 			</div>
 		</div>
 	</div>
 {% endblock %}
+
+
+
+ 
+    
+
+  

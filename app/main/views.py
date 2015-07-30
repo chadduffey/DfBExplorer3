@@ -4,7 +4,7 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from . import main
-from ..dfbapi import basicInfo, teamMembers, teamStorage, deleteMember, addMember
+from ..dfbapi import basicInfo, teamMembers, teamStorage, deleteMember, addMember, listGroups
 
 from forms import AddUserForm
 
@@ -77,7 +77,13 @@ def team_storage():
 
 @main.route('/group_membership', methods=['GET', 'POST'])
 def group_membership():
-	return render_template('main/group_membership.html')
+    if current_user.is_authenticated():
+	    try:
+			data = listGroups()
+			groups = data.get("groups")
+			return render_template('main/group_membership.html', groups=groups)
+	    except:
+		    return render_template('main/group_membership.html')
 
 
 @main.route('/team_management', methods=['GET', 'POST'])
