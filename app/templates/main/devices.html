@@ -18,9 +18,38 @@
 	     	</div>
 	     	<div class="col-md-8">
 				<h1>Devices</h1>
-				<h3>Coming Soon</h3>
+					<div class="table-responsive">
+					    <table class="table table-striped">
+			              	<thead>
+			                <tr>
+				                <th>Name</th>
+				                <th>Country</th>
+				                <th>Time</th>
+                        		<th>Event</th>
+                        		<th>Platform</th>
+                        		<th>Machine Name</th>
+                        		<th>IP Address</th>
+			                </tr>
+			              	</thead>
+			              	<tbody>					                
+			              	{% for event in deviceEvents %}
+    			            <tr>
+    			                <td>{{ event["name"] }}</td>
+    			                <td>{{ event["country"] }}</td>
+    			                <td>{{ event["time"] }}</td>
+    			                <td>{{ event["event_type_description"] }}</td>
+    			                <td>{{ event["info_dict"]["platform"] }}</td>
+    			                <td>{{ event["info_dict"]["display_name"] }}</td>
+    			                <td>{{ event["ip_address"] }}</td>
+            				</tr>
+        					{% endfor %}
+			            	</tbody>
+						</table>
+	     			</div>
 			</div>
 		</div>
 	</div>
 
 {% endblock %}
+
+{u'user_id': 366840493, u'name': u'Chad Duffey', u'country': u'AU', u'time': u'2015-05-27T02:17:46+00:00', u'event_type_description': u'Linked a device', u'event_category': u'devices', u'info_dict': {u'platform': u'Windows', u'display_name': u'chad-win8pc'}, u'member_id': u'dbmid:AABDg47u7a9ZcdN8yfvlMRmHTdUnKUZc9Ms', u'ip_address': u'175.45.121.61', u'email': u'chad@dbtests.info', u'event_type': u'device_link'}

@@ -4,7 +4,8 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from . import main
-from ..dfbapi import basicInfo, teamMembers, teamStorage, deleteMember, addMember, listGroups
+from ..dfbapi import (basicInfo, teamMembers, teamStorage, 
+						deleteMember, addMember, listGroups, getDeviceEvents)
 
 from forms import AddUserForm
 
@@ -108,7 +109,9 @@ def delete_user(member_id):
 
 @main.route('/devices', methods=['GET', 'POST'])
 def devices():
-	return render_template('main/devices.html')
+	allEvents = getDeviceEvents()
+	deviceEvents = allEvents.get("events")
+	return render_template('main/devices.html', deviceEvents=deviceEvents)
 
 
 @main.route('/team_audit', methods=['GET', 'POST'])
