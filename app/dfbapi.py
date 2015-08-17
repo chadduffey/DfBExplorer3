@@ -95,3 +95,18 @@ def getDeviceEvents():
 	data = response.read()
 	converted_data = json.loads(data)
 	return converted_data
+
+def getAllEvents():
+	#dfbpwd = current_user.dfbpassword
+	
+	#temp to keep assignment moving. 
+	dfbpwd = "Bearer 5POVRTzm3ZAAAAAAAAABvn6tAxMvpd_gUX2ANaasiQeuzjaOC2P_N2SkhZf3c1En"
+	request = urllib2.Request('https://api.dropbox.com/1/team/log/get_events')
+	request.add_header('Content-type', 'application/json')
+	request.add_header('Authorization', dfbpwd)
+	body = str('{}')
+	request.add_data(body)
+	response = urllib2.urlopen(request)
+	data = response.read()
+	converted_data = json.loads(data)
+	return converted_data

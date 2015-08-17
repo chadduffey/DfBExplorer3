@@ -18,7 +18,30 @@
 	     	</div>
 	     	<div class="col-md-8">
 				<h1>Team Audit</h1>
-				<h3>Coming Soon</h3>
+				<div class="table-responsive">
+				    <table class="table table-striped">
+		              	<thead>
+		                <tr>
+			                <th>Name</th>
+			                <th>Time</th>
+                    		<th>Event</th>
+                    		<th>IP Address</th>
+		                </tr>
+		              	</thead>
+		              	<tbody>					                
+		              	{% for event in events %}
+			            <tr>
+			                <td>{{ event["name"] }}</td>
+			                <td>{{ event["time"] }}</td>
+			                <td>{{ event["event_type_description"] }}</td>
+			                <td>{{ event["ip_address"] }}</td>
+        				</tr>
+    					{% endfor %}
+		            	</tbody>
+					</table>
+	     		</div>
+				{% for event in allEvents %}
+        		{% endfor %}
 			</div>
 		</div>
 	</div>
