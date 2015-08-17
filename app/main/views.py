@@ -59,13 +59,20 @@ def team_storage():
 			unshared_usage = data.get("unshared_usage")
 			shared_folders = data.get("shared_folders")
 			start_date = data.get("start_date")
+
+			dummy_dates = ["August", "July", "June", "May"
+							"April", "March", "February", "January",
+							"December", "November", "October", "September"
+							"August", "July"]
+
 			return render_template('main/team_storage.html', 
 											total_usage=total_usage,
 											member_storage_map=member_storage_map,
 											shared_usage=shared_usage,
 											unshared_usage=unshared_usage,
 											shared_folders=shared_folders,
-											start_date=start_date)
+											start_date=start_date,
+											dates=dummy_dates)
 		except:
 			return render_template('main/team_storage.html', 
 											total_usage=[1,200,3000],
