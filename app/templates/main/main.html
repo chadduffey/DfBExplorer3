@@ -13,7 +13,6 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
 google.setOnLoadCallback(drawChart);
-google.setOnLoadCallback(drawChart1);
 
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
@@ -38,28 +37,7 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
-function drawChart1() {
 
-    // Create the data table.
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Licence');
-    data.addColumn('number', 'Sample');
-    data.addRows([
-      ['iOS', 3],
-      ['Android', 4],
-      ['Windows Mobile', 2],
-      ['Blackberry', 1]
-    ]);
-
-    // Set chart options
-    var options = {'title':'Devices',
-                   'width':400,
-                   'height':300};
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div1'));
-    chart.draw(data, options);
-}
 </script>
 
 <div class="container-fluid">	
@@ -84,12 +62,8 @@ function drawChart1() {
               			<span class="text-muted">Team: {{ dbTeamName }}</span>
               			<div id="chart_div"></div>
             		</div>
+          </div>
 
-            		<div class="col-xs-6 col-sm-6 placeholder" style="margin-bottom: 40px;">
-		              	<h4>Team Devices</h4>
-		              	<span class="text-muted">Placeholder Graph</span>
-		              	<div id="chart_div1"></div>
-            		</div>
 
 					<h2 class="sub-header" style="margin-top: 40px;">Team Members</h2>
 					<div class="table-responsive">
@@ -123,6 +97,7 @@ function drawChart1() {
 			              </tbody>
 					    </table>
 	     		</div>
+
 	     	</div>
 	    </div>	
 	</div>
