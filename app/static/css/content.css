@@ -1,0 +1,8 @@
+h1, h3 {
+	font-family: 'Lato', sans-serif;
+	padding-bottom: 20px;
+}
+
+.panel-body > .list-group > .list-group-item > a {
+	color: red;
+}

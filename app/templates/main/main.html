@@ -2,8 +2,8 @@
 
 {% block title %}DfB Explorer - Overview{% endblock %}
 
-{% block content %}
-
+{% block head %}
+{{  super() }}
 <!--Load the AJAX API-->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -40,12 +40,19 @@ function drawChart() {
 
 </script>
 
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../static/css/content.css">
+
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
 <div class="container-fluid">	
   		<div class="row">
     		<div class="col-sm-2 sidebar">
       			<ul class="nav nav-sidebar">
-		            <li class="active"><a href="{{ url_for('main.index') }}">Team Overview <span class="sr-only">(current)</span></a></li>
-		            <li><a href="{{ url_for('main.sharing_activity') }}">Sharing Activity</a></li>
+                <li class="active"><a href="{{ url_for('main.index') }}">Team Overview <span class="sr-only">(current)</span></a></li>
 		            <li><a href="{{ url_for('main.team_storage') }}">Team Storage</a></li>
 		            <li><a href="{{ url_for('main.group_membership') }}">Group Membership</a></li>
 		            <li><a href="{{ url_for('main.team_management') }}">Team Management</a></li>
@@ -58,47 +65,57 @@ function drawChart() {
 	     		<div class="row placeholders">
 
             		<div class="col-xs-6 col-sm-6 placeholder">
-              			<h4>Dropbox Licence Usage</h4>
-              			<span class="text-muted">Team: {{ dbTeamName }}</span>
-              			<div style="border: 2px solid black; margin-bottom: 10px;">
-                      <div id="chart_div"></div>
+              			<div class="panel panel-default">
+                      <div class="panel-body">
+                        <div id="chart_div"></div>
+                      </div>
                     </div>
             		</div>
+                <div class="col-xs-6 col-sm-6 placeholder">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <img src="../static/img/totw_groups.png" width="400" height="auto" class="small"/>
+                    </div>
+                  </div>
+                </div>
           </div>
 
-
-					<h2 class="sub-header" style="margin-top: 40px;">Team Members</h2>
-					<div class="table-responsive">
-					    <table class="table table-striped">
-			              <thead>
-			                <tr>
-			                  <th>Name</th>
-			                  <th>User Email</th>
-			                  <th>Status</th>
-                        <th>Member Id</th>
-			                </tr>
-			              </thead>
-			              <tbody>					                
-			                	{% for member in teamMembers %}
-                        {% if  member["profile"]["status"] == "invited" %}
-                            <tr>
-                              <td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
-                              <td>{{ member["profile"]["email"] }}</td>
-                              <td style="color:#3366CC;">{{ member["profile"]["status"] }}</td>
-                              <td>{{ member["profile"]["member_id"] }}</td>
-                            </tr>
-                        {% else %}
-    			                	<tr>
-    			                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
-            									<td>{{ member["profile"]["email"] }}</td>
-            									<td style="color:#109618;">{{ member["profile"]["status"] }}</td>
-                              <td>{{ member["profile"]["member_id"] }}</td>
-            								</tr>
-                        {% endif %}
-        								{% endfor %}
-			              </tbody>
-					    </table>
-	     		</div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+    					<h2 class="sub-header" style="margin-top: 40px;">Team Members</h2>
+    					<div class="table-responsive">
+    					    <table class="table table-striped">
+    			              <thead>
+    			                <tr>
+    			                  <th>Name</th>
+    			                  <th>User Email</th>
+    			                  <th>Status</th>
+                            <th>Member Id</th>
+    			                </tr>
+    			              </thead>
+    			              <tbody>					                
+    			                	{% for member in teamMembers %}
+                            {% if  member["profile"]["status"] == "invited" %}
+                                <tr>
+                                  <td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+                                  <td>{{ member["profile"]["email"] }}</td>
+                                  <td style="color:#3366CC;">{{ member["profile"]["status"] }}</td>
+                                  <td>{{ member["profile"]["member_id"] }}</td>
+                                </tr>
+                            {% else %}
+        			                	<tr>
+        			                		<td>{{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</td>
+                									<td>{{ member["profile"]["email"] }}</td>
+                									<td style="color:#109618;">{{ member["profile"]["status"] }}</td>
+                                  <td>{{ member["profile"]["member_id"] }}</td>
+                								</tr>
+                            {% endif %}
+            								{% endfor %}
+    			              </tbody>
+    					    </table>
+    	     		</div>
+            </div>
+          </div>
 
 	     	</div>
 	    </div>	

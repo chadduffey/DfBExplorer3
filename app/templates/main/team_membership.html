@@ -2,13 +2,18 @@
 
 {% block title %}DfB Explorer - Teams{% endblock %}
 
+{% block head %}
+{{  super() }}
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../static/css/content.css">
+{% endblock %}
+
 {% block content %}
 	<div class="container-fluid">	
   		<div class="row">
     		<div class="col-sm-2 sidebar">
       			<ul class="nav nav-sidebar">
 		            <li class="active"><a href="{{ url_for('main.index') }}">Team Overview <span class="sr-only">(current)</span></a></li>
-		            <li><a href="{{ url_for('main.sharing_activity') }}">Sharing Activity</a></li>
 		            <li><a href="{{ url_for('main.team_storage') }}">Team Storage</a></li>
 		            <li><a href="{{ url_for('main.group_membership') }}">Group Membership</a></li>
 		            <li><a href="{{ url_for('main.team_management') }}">Team Management</a></li>

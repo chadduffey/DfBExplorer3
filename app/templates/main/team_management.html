@@ -3,13 +3,18 @@
 
 {% block title %}DfB Explorer - Team Management{% endblock %}
 
+{% block head %}
+{{  super() }}
+	<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../static/css/content.css">
+{% endblock %}
+
 {% block content %}
 	<div class="container-fluid">	
   		<div class="row">
     		<div class="col-sm-2 sidebar">
       			<ul class="nav nav-sidebar">
 		            <li class="active"><a href="{{ url_for('main.index') }}">Team Overview <span class="sr-only">(current)</span></a></li>
-		            <li><a href="{{ url_for('main.sharing_activity') }}">Sharing Activity</a></li>
 		            <li><a href="{{ url_for('main.team_storage') }}">Team Storage</a></li>
 		            <li><a href="{{ url_for('main.group_membership') }}">Group Membership</a></li>
 		            <li><a href="{{ url_for('main.team_management') }}">Team Management</a></li>
@@ -20,21 +25,26 @@
 	     	<div class="col-md-10">
 				<h1>Team Management</h1>
 				<div class="col-md-4">
-					<h3>Add Team Member:</h3>
-				    {{ wtf.quick_form(form) }}
-				</div>
-				<div class="col-md-1">
-					
+					<div class="panel panel-default">
+						<div class="panel-body">
+						    <h3>Add Team Member</h3>
+				    		{{ wtf.quick_form(form) }}
+						</div>
+					</div>
 				</div>
 				<div class="col-md-6">
-					<h3 style="color:red">Delete team member:</h3>
-				    {% for member in teamMembers %}
-                        <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        <a href='{{ url_for("main.delete_user", member_id=member["profile"]["member_id"]) }}'> 
-                        {{ member["profile"]["given_name"] }} 
-                        {{ member["profile"]["surname"] }} (
-                        {{ member["profile"]["email"] }} )</a></p>
-        			{% endfor %}
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h3>Delete team member</h3>
+							<ul class="list-group">
+						    {% for member in teamMembers %}
+									  <li class="list-group-item"><a href='{{ url_for("main.delete_user", member_id=member["profile"]["member_id"]) }}' onclick="if (!confirm('Are you sure?')) return false;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> {{ member["profile"]["given_name"] }} 
+		                        	{{ member["profile"]["surname"] }} (
+		                        	{{ member["profile"]["email"] }} )</li>
+		        			{% endfor %}
+		        			</ul>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
