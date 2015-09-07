@@ -11,6 +11,7 @@ from forms import AddUserForm
 
 import urllib2
 import json
+import datetime
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -60,10 +61,9 @@ def team_storage():
 			shared_folders = data.get("shared_folders")
 			start_date = data.get("start_date")
 
-			dummy_dates = ["August", "July", "June", "May"
-							"April", "March", "February", "January",
-							"December", "November", "October", "September"
-							"August", "July"]
+			numdays = 100
+			base = datetime.datetime.today()
+			date_list = [base - datetime.timedelta(days=x) for x in range(0, numdays)]
 
 			return render_template('main/team_storage.html', 
 											total_usage=total_usage,
@@ -72,12 +72,12 @@ def team_storage():
 											unshared_usage=unshared_usage,
 											shared_folders=shared_folders,
 											start_date=start_date,
-											dates=dummy_dates)
+											date_list=date_list)
 		except:
 			return render_template('main/team_storage.html', 
 											total_usage=[1,200,3000],
 											member_storage_map=1,
-											shared_usage=1,
+											shared_usage=[1,2,3],
 											unshared_usage=1,
 											shared_folders=1,
 											start_date=1/1/1)

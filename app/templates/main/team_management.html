@@ -27,6 +27,7 @@
 				<div class="col-md-4">
 					<div class="panel panel-default">
 						<div class="panel-body">
+						    <img src="../static/img/user_provision.svg" width="100" height="auto" class="small"/>
 						    <h3>Add Team Member</h3>
 				    		{{ wtf.quick_form(form) }}
 						</div>
@@ -35,10 +36,11 @@
 				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-body">
+						<img src="../static/img/delete_team_member.svg" width="100" height="auto" class="small"/>
 							<h3>Delete team member</h3>
 							<ul class="list-group">
 						    {% for member in teamMembers %}
-									  <li class="list-group-item"><a href='{{ url_for("main.delete_user", member_id=member["profile"]["member_id"]) }}' onclick="if (!confirm('Are you sure?')) return false;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> {{ member["profile"]["given_name"] }} 
+									  <li class="list-group-item"><a href='{{ url_for("main.delete_user", member_id=member["profile"]["member_id"]) }}' onclick="if (!confirm('Are you sure?')) return false;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> {{ member["profile"]["given_name"] }} 
 		                        	{{ member["profile"]["surname"] }} (
 		                        	{{ member["profile"]["email"] }} )</li>
 		        			{% endfor %}
