@@ -81,11 +81,22 @@ def listGroups():
 	converted_data = json.loads(data)
 	return converted_data
 
+def listMembersOfGroup(group_id):
+	dfbpwd = current_user.dfbpassword
+	request = urllib2.Request('https://api.dropbox.com/1/team/groups/get_info')
+	request.add_header('Content-type', 'application/json')
+	request.add_header('Authorization', dfbpwd)
+	body = str('{"group_ids": ["' + group_id + '"] }') #g:e4f395453ce6dd900000000000000180
+	request.add_data(body)
+	response = urllib2.urlopen(request)
+	data = response.read()
+	converted_data = json.loads(data)
+	return converted_data	
+
 def getDeviceEvents():
-	#dfbpwd = current_user.dfbpassword
-	
 	#temp to keep assignment moving. 
 	dfbpwd = "Bearer 5POVRTzm3ZAAAAAAAAABvn6tAxMvpd_gUX2ANaasiQeuzjaOC2P_N2SkhZf3c1En"
+	#dfbpwd = current_user.dfbpassword
 	request = urllib2.Request('https://api.dropbox.com/1/team/log/get_events')
 	request.add_header('Content-type', 'application/json')
 	request.add_header('Authorization', dfbpwd)

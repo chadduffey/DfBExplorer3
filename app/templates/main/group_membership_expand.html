@@ -22,13 +22,20 @@
 	         	</ul>
 	     	</div>
 	     	<div class="col-md-8">
-				<h1>Group Memberships</h1>
+				<h1>Group Memberships for {{ group_name }}</h1>
 				<div class="panel panel-default">
                     <div class="panel-body">
                       <img src="../static/img/groups.png" width="400" height="auto" class="small"/>
                     </div>
                 </div>
-				<ul class="list-group">
+                <p>Members of {{ group_name }}</p>
+                <ul class="list-group">
+                {% for member in group_data[0]["members"] %}
+						<li class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ member["profile"]["given_name"] }} {{ member["profile"]["surname"] }}</li>
+	        	{% endfor %}
+	        	</ul>
+	        	<p>Other Team Groups:</p>
+	        	<ul class="list-group">
 				{% for group in groups %}
             		<li class="list-group-item">
 	                    <span class="badge">{{ group["num_members"] }}</span>

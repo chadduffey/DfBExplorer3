@@ -4,7 +4,7 @@ from .. import db
 from ..models import User
 from ..email import send_email
 from . import main
-from ..dfbapi import (basicInfo, teamMembers, teamStorage, 
+from ..dfbapi import (basicInfo, teamMembers, teamStorage, listMembersOfGroup,
 						deleteMember, addMember, listGroups, getDeviceEvents, getAllEvents)
 
 from forms import AddUserForm
@@ -15,8 +15,8 @@ import datetime
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    if current_user.is_authenticated():
-    	try:
+	if current_user.is_authenticated():
+		try:
 			#Dropbox Basics
 			converted_data = basicInfo()
 			totalLicences=converted_data["num_licensed_users"]
@@ -29,24 +29,20 @@ def index():
 									user=current_user, 
 									dbTeamName=converted_data["name"], 
 									remainingLicences=remainingLicences,
-	    							totalLicences=converted_data["num_licensed_users"], 
-	    							licencesInUse=converted_data["num_provisioned_users"], 
-	    							teamId=converted_data["team_id"],
-	    							teamMembers = allTeamMembers)
-        except:
+									totalLicences=converted_data["num_licensed_users"], 
+									licencesInUse=converted_data["num_provisioned_users"], 
+									teamId=converted_data["team_id"],
+									teamMembers = allTeamMembers)
+		except:
 			return render_template('main/main.html', 
 									user="Authentication Error", 
 									dbTeamName="Error", 
 									remainingLicences=5,
-	    							totalLicences=10, 
-	    							licencesInUse=5, 
-	    							teamId=123,
-	    							teamMembers="Error")
-    return render_template('index.html')
-
-@main.route('/sharing_activity', methods=['GET', 'POST'])
-def sharing_activity():
-	return render_template('main/sharing_activity.html')
+									totalLicences=10, 
+									licencesInUse=5, 
+									teamId=123,
+									teamMembers="Error")
+	return render_template('index.html')
 
 
 @main.route('/team_storage', methods=['GET', 'POST'])
@@ -83,15 +79,27 @@ def team_storage():
 											start_date=1/1/1)
 
 
-@main.route('/group_membership', methods=['GET', 'POST'])
-def group_membership():
-    if current_user.is_authenticated():
-	    try:
-			data = listGroups()
-			groups = data.get("groups")
-			return render_template('main/group_membership.html', groups=groups)
-	    except:
-		    return render_template('main/group_membership.html')
+@main.route('/group_membership', methods=['GET', 'POST'], defaults={'group_id': "none"})
+@main.route('/group_membership/<group_id>', methods=['GET', 'POST'])
+def group_membership(group_id):
+	if current_user.is_authenticated():
+		if group_id == "none":
+			try:
+				data = listGroups()
+				groups = data.get("groups")
+				return render_template('main/group_membership.html', groups=groups)
+			except:
+				return render_template('main/group_membership.html')
+		else:
+			try:
+				data = listMembersOfGroup(group_id)
+				data1 = listGroups()
+				groups = data1.get("groups")
+				group_data = data.get("groups")
+				group_name = group_data[0].get("group_name")
+				return render_template('main/group_membership_expand.html', group_data=group_data, group_name=group_name, groups=groups)
+			except:
+				return render_template('main/group_membership.html')
 
 
 @main.route('/team_management', methods=['GET', 'POST'])
