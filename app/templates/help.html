@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}DfB Explorer{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="../static/css/frontpage.css">
+    <link href='http://fonts.googleapis.com/css?family=Economica|Source+Code+Pro' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block page_content %}
+    {{ super() }}
+    <img src="../static/img/dropbox-transparent.png" width="90px" height="auto"class="small"/><h1 class="cover-heading">DfB Explorer Help</h1>
+    <h3>New Accounts</h3>
+    <h3>Resetting Your Password</h3>
+    <h3>Team Members</h3>
+    <h3>Team Storage</h3>
+    <h3>Team Management</h3>
+    <h3>Devices</h3>
+    <h3>Team Audit</h3>
+{% endblock %}

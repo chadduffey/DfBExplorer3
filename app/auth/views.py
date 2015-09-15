@@ -21,6 +21,12 @@ def unconfirmed():
         return redirect(url_for('main.index'))
     return render_template('auth/unconfirmed.html')
 
+
+@auth.route('/help')
+def help():
+    return render_template('help.html')
+
+
 @auth.route('/change-email', methods=['GET', 'POST'])
 @login_required
 def change_email_request():

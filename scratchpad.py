@@ -28,6 +28,16 @@ print "The Dropbox team ID is: " + converted_data["team_id"]
 '''
 import urllib2
 import json
+import datetime
+
+dates = [
+			"September Week 4",
+			"September Week 3",
+			"September Week 2",
+			"September Week 1",
+			"August Week 4",
+			
+		]
 
 def teamStorage():
 	dfbpwd = "Bearer 5POVRTzm3ZAAAAAAAAABTtqrqiasvx-jR2W5LyEFfKRBmi41ORoyT_rxgq5-761M"
@@ -42,7 +52,11 @@ def teamStorage():
 	return converted_data
 
 data = teamStorage()
+start_date = data.get("start_date")
 sharedStorage = data.get("shared_usage")
+count = 0
 for entry in sharedStorage:
-	print entry #["profile"]["email"]
+	print str(entry) + " | " + str(count)
+	count += 1
+print start_date
 

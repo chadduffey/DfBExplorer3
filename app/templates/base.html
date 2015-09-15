@@ -12,7 +12,7 @@
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img src="../static/img/dbicon.png" width="30" height="30" /></a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="../static/img/dbicon.png" width="30" height="30" /></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -23,11 +23,13 @@
                         <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
                         <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
                         <li><a href="{{ url_for('auth.change_token') }}">Change Auth Token</a></li>
+                        <li><a href="{{ url_for('auth.help') }}">Help</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                     </ul>
                 </li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                    <li><a href="{{ url_for('auth.help') }}">Help</a></li>
                 {% endif %}
             </ul>
         </div>
