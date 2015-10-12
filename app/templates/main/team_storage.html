@@ -21,9 +21,9 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Time', 'MB'],
-          {% for entry in total_usage if entry|int != 0 %}
-	          ['date',  {{ entry|int / 1024 /1024 + 50}}],
+          ['Date', 'MB'],
+          {% for date, entry in combo_list %}
+	          [ "{{ date }}", {{ entry|int / 1024 /1024 + 50}} ],
           {% endfor %}
         ]);
 
@@ -44,8 +44,8 @@
       function drawChart2() {
         var data = google.visualization.arrayToDataTable([
           ['Time', 'MB'],
-          {% for entry in shared_usage if entry|int > 0 %}
-	          ['date',  {{ entry|int / 1024 /1024 + 50 }}],
+          {% for date, entry in shared_usage %}
+	          [ "{{ date }}",  {{ entry|int / 1024 /1024 + 50 }} ],
           {% endfor %}
         ]);
 

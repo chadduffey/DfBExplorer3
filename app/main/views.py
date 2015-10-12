@@ -57,18 +57,32 @@ def team_storage():
 			shared_folders = data.get("shared_folders")
 			start_date = data.get("start_date")
 
-			numdays = 100
+			numdays = len(total_usage)
 			base = datetime.datetime.today()
-			date_list = [base - datetime.timedelta(days=x) for x in range(0, numdays)]
+			date_list = [str(base - datetime.timedelta(days=x))[:10] for x in range(0, numdays)]
+
+			c = 0
+			combo_list = []
+			for date in date_list:
+				if total_usage[c] > 0:
+					combo_list.append([date, total_usage[c]])
+				c = c + 1
+
+			c = 0
+			shared_combo_list = []
+			for date in date_list:
+				if shared_usage[c] > 0:
+					shared_combo_list.append([date, shared_usage[c]])
+				c = c + 1
 
 			return render_template('main/team_storage.html', 
-											total_usage=total_usage,
 											member_storage_map=member_storage_map,
-											shared_usage=shared_usage,
+											shared_usage=shared_combo_list,
 											unshared_usage=unshared_usage,
 											shared_folders=shared_folders,
 											start_date=start_date,
-											date_list=date_list)
+											date_list=date_list,
+											combo_list=combo_list)
 		except:
 			return render_template('main/team_storage.html', 
 											total_usage=[1,200,3000],
